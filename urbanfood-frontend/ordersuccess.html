@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UrbanFood - Order Success</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background: linear-gradient(to right, #4CAF50, #81C784);
+        color: white;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: bold;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+    }
+    .order-success-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 40px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .order-success-container h2 {
+        color: #4CAF50;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .order-success-container p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .order-success-container .order-id {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #388E3C;
+    }
+
+   
+    .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px; 
+            margin-left: 255px;
+        }
+
+
+        .logout-btn {
+            background-color: #81C784;
+            color: white;
+          border: none;
+            cursor: pointer;
+            
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #2e7d32;
+        }
+        nav a,
+        .dropbtn {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        .dropdown:hover .dropbtn {
+            color: #e8f5e9;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UrbanFood - Order Success</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">  Categories ▼</button>
+            <div class="dropdown-content">
+                <a href="category.html?category=Vegetables">Vegetables</a>
+                <a href="category.html?category=Fruits">Fruits</a>
+                <a href="category.html?category=Dairy">Dairy</a>
+                <a href="category.html?category=Bakery">Baked Goods</a>
+                <a href="category.html?category=Craft">Handmade Crafts</a>
+            </div>
+        </div>
+        <a href="cart.html">🛒 Cart</a>
+        <a href="Feedback.html">Feedback</a>
+        <a href="login.html" id="login-link">Login</a>
+        <button class="logout-btn" onclick="logout()"style="display:none;">Logout</button>
+        <div class="welcome-container" id="welcome-container" style="display:none;">
+            <span id="welcome-msg">Welcome, user@example.com</span>
+        </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="order-success-container">
+      <h2>Your order has been placed successfully!</h2>
+      <p>Thank you for shopping with us. Your order is now being processed. You will receive an email confirmation shortly.</p>
+      <p>Your Order ID: <span class="order-id" id="order-id">#233456</span></p>
+      <button class="btn" onclick="window.location.href = 'index.html';">Go to Home</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UrbanFood | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <script>
+    // Optionally, you could display the order ID dynamically from a URL parameter or session storage
+    const orderId = new URLSearchParams(window.location.search).get('orderId');
+    if (orderId) {
+      document.getElementById("order-id").textContent = `#${orderId}`;
+    }
+
+    
+
+    const loggedInEmail = localStorage.getItem("loggedInCustomer");
+
+        if (loggedInEmail) {
+            document.getElementById("welcome-container").style.display = "flex";
+            document.getElementById("welcome-msg").innerText = `Welcome, ${loggedInEmail}`;
+            document.getElementById("login-link").style.display = "none";
+            document.querySelector(".logout-btn").style.display = "inline-block";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInCustomer");
+            window.location.href = "login.html";
+        }
+  </script>
+</body>
+</html>

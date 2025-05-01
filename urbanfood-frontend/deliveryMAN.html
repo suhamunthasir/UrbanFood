@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Man Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    :root {
+    --primary: #2e7d32;
+    --primary-light: #4CAF50;
+    --text-light: #666;
+  }
+  
+  header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  
+  nav {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  
+  nav a:hover {
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  nav a i {
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      gap: 1rem;
+    }
+    
+    header h1 {
+      font-size: 1.5rem;
+    }
+  }
+    main {
+      padding: 30px;
+    }
+
+    .dashboard-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    section:hover {
+      transform: scale(1.01);
+    }
+
+    section h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      border-left: 5px solid #4CAF50;
+      padding-left: 10px;
+      color: #2e7d32;
+    }
+
+        
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            color: #333;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+          <h1><i class="fas fa-tachometer-alt"></i> UrbanFood Admin Panel</h1>
+          <nav>
+            <a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="manage-products.html"><i class="fas fa-box-open"></i> Manage Products</a>
+            <a href="manage-supplier.html"><i class="fas fa-people-carry"></i> Manage Suppliers</a>
+            <a href="manage-deliveries.html"><i class="fas fa-truck"></i> Manage Deliveries</a>
+            <a href="deliveryMAN.html"><i class="fas fa-sign-out-alt"></i> Delivery Men</a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </nav>
+        </div>
+      </header>
+    <div class="container">
+        <h2>Register Delivery Man</h2>
+        <form id="deliveryManForm" onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleNumber">Vehicle Number</label>
+                <input type="text" id="vehicleNumber" required>
+            </div>
+            <button type="submit">Register Delivery Man</button>
+        </form>
+
+        <h3>Registered Delivery Men</h3>
+        <table id="deliveryMenTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Vehicle Number</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const apiUrl = 'http://localhost:8081/api/deliverymen/register'; 
+        const getApiUrl = 'http://localhost:8081/api/deliverymen';
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const vehicleNumber = document.getElementById('vehicleNumber').value;
+
+            const deliveryMan = {
+                name,
+                email,
+                phone,
+                vehicleNumber
+            };
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(deliveryMan)
+            })
+            .then(response => {
+                console.log('Response Status:', response.status);
+                return response.json(); 
+            })
+            .then(data => {
+                console.log('Registered Delivery Man:', data); 
+                if (data) {
+                    alert('Delivery Man registered successfully!');
+                    document.getElementById('deliveryManForm').reset();
+                    loadDeliveryMen(); 
+                }
+            })
+            .catch(error => {
+                console.error('Error registering delivery man:', error);
+                alert('Saved');
+            });
+        }
+
+       
+        function loadDeliveryMen() {
+            fetch(getApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('deliveryMenTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = ''; // Clear the current table data
+
+                data.forEach(deliveryMan => {
+                    const row = tableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${deliveryMan.name}</td>
+                        <td>${deliveryMan.email}</td>
+                        <td>${deliveryMan.phone}</td>
+                        <td>${deliveryMan.vehicleNumber}</td>
+                    `;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching delivery men:', error);
+            });
+        }
+
+       
+        window.onload = loadDeliveryMen;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanFood - Feedback</title>
+    <style>
+        :root {
+            --primary-color: #81C784;
+            --primary-dark: #2E7D32;
+            --secondary-color: #FFB74D;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+            --border-color: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+header {
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e8f5e9;
+}
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover Effects */
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #444;
+}
+
+
+        
+        .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px; 
+            margin-left: 240px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .feedback-form {
+            background-color: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feedback-form h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .feedback-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .feedback-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .rating-container {
+            margin: 1.5rem 0;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            margin-top: 0.5rem;
+        }
+        
+        .star-rating span {
+            font-size: 2.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        
+        .star-rating span:hover {
+            transform: scale(1.1);
+        }
+        
+        .star-rating span.selected {
+            color: var(--secondary-color);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .feedback-display {
+            background-color: white;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .feedback-display h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .feedback-display table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .feedback-display th, .feedback-display td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .feedback-display th {
+            background-color: var(--light-color);
+            font-weight: 500;
+        }
+        
+        .feedback-display tr:hover {
+            background-color: rgba(129, 199, 132, 0.1);
+        }
+        
+        .stars {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .no-feedback {
+            text-align: center;
+            color: #777;
+            padding: 2rem;
+        }
+        
+        footer {
+            background-color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        footer p {
+            color: #777;
+        }
+        
+        footer a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>UrbanFood</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Categories ▼</button>
+                <div class="dropdown-content">
+                    <a href="category.html?category=Vegetables">Vegetables</a>
+                    <a href="category.html?category=Fruits">Fruits</a>
+                    <a href="category.html?category=Dairy">Dairy</a>
+                    <a href="category.html?category=Bakery">Baked Goods</a>
+                    <a href="category.html?category=Craft">Handmade Crafts</a>
+                </div>
+            </div>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="Feedback.html">Feedback</a>
+            <a href="login.html" id="login-link">Login</a>
+            <button class="logout-btn" onclick="logout()" style="display:none;">Logout</button>
+            <div class="welcome-container" id="welcome-container" style="display:none;">
+                <span id="welcome-msg">Welcome, user@example.com</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Feedback Form -->
+        <section class="feedback-form">
+            <h2>Share Your Feedback</h2>
+            <form id="feedbackForm">
+                <div>
+                    <label for="message">Your Feedback Message:</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your experience..." required></textarea>
+                </div>
+                <div class="rating-container">
+                    <label>Your Rating:</label>
+                    <div class="star-rating" id="star-rating">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+        </section>
+
+        <!-- Displaying Feedback -->
+        <section class="feedback-display">
+            <h3>Customer Feedback</h3>
+            <table id="feedbackTable">
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Feedback will be populated here dynamically -->
+                </tbody>
+            </table>
+            <div id="noFeedback" class="no-feedback">No feedback submitted yet. Be the first to share your thoughts!</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 UrbanFood | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+    </footer>
+    <script>
+        const feedbackApiBaseUrl = "http://localhost:8083/api/feedback";
+    
+        const feedbackForm = document.getElementById("feedbackForm");
+        const starRating = document.getElementById("star-rating");
+        const tableBody = document.querySelector("#feedbackTable tbody");
+        const noFeedbackDiv = document.getElementById("noFeedback");
+        let selectedStars = [false, false, false, false, false];
+    
+        // Load feedback from backend on page load
+        async function loadFeedbacks() {
+            try {
+                const response = await fetch(`${feedbackApiBaseUrl}/all`);
+                const feedbacks = await response.json();
+    
+                tableBody.innerHTML = ""; // Clear table
+    
+                if (feedbacks.length === 0) {
+                    noFeedbackDiv.style.display = "block";
+                    return;
+                } else {
+                    noFeedbackDiv.style.display = "none";
+                }
+    
+                feedbacks.reverse().forEach(feedback => {
+                    const row = document.createElement("tr");
+    
+                    // Rating stars
+                    const ratingCell = document.createElement("td");
+                    const stars = Array.from({ length: 5 }, (_, i) =>
+                        i < feedback.rating ? "★" : "☆"
+                    ).join("");
+                    ratingCell.innerHTML = `<span class="stars">${stars}</span>`;
+                    row.appendChild(ratingCell);
+    
+                    // Message
+                    const messageCell = document.createElement("td");
+                    messageCell.innerText = feedback.message;
+                    row.appendChild(messageCell);
+    
+                    tableBody.appendChild(row);
+                });
+            } catch (err) {
+                console.error("Error loading feedbacks:", err);
+            }
+        }
+    
+        // Handle star selection
+        starRating.addEventListener("click", (event) => {
+            if (event.target.dataset.value) {
+                const clickedIndex = parseInt(event.target.dataset.value) - 1;
+                const newState = !selectedStars[clickedIndex];
+    
+                for (let i = 0; i <= clickedIndex; i++) {
+                    selectedStars[i] = newState;
+                }
+                if (!newState) {
+                    for (let i = clickedIndex + 1; i < 5; i++) {
+                        selectedStars[i] = false;
+                    }
+                }
+    
+                const stars = starRating.querySelectorAll("span");
+                stars.forEach((star, index) => {
+                    if (selectedStars[index]) {
+                        star.classList.add("selected");
+                    } else {
+                        star.classList.remove("selected");
+                    }
+                });
+            }
+        });
+    
+        // Submit feedback
+        feedbackForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+    
+            const message = document.getElementById("message").value.trim();
+            const rating = selectedStars.filter(star => star).length;
+    
+            if (rating > 0 && message) {
+                try {
+                    const response = await fetch(`${feedbackApiBaseUrl}/submit`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message, rating })
+                    });
+    
+                    if (response.ok) {
+                        alert("Thank you for your feedback!");
+                        feedbackForm.reset();
+                        selectedStars = [false, false, false, false, false];
+                        starRating.querySelectorAll("span").forEach(star => star.classList.remove("selected"));
+                        loadFeedbacks();
+                    } else {
+                        alert("Error submitting feedback.");
+                    }
+                } catch (err) {
+                    console.error("Submit error:", err);
+                }
+            } else {
+                alert("Please provide both a rating (by clicking the stars) and a message.");
+            }
+        });
+    
+        // Initial load
+        loadFeedbacks();
+    </script>
+    
+</body>
+</html>

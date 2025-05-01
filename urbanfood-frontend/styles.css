@@ -1,0 +1,195 @@
+/* Reset and fonts */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e8f5e9;
+}
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover Effects */
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #444;
+}
+
+
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.intro {
+    background-image: url('cov1.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 120px 20px; /* Increased from 80px to 120px for top/bottom */
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    min-height: 300px; /* Added minimum height */
+}
+
+.intro h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 12px 30px;
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2e7d32;
+}
+
+#categories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+#categories-container div {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#categories-container div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+#categories-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #388e3c;
+}
+
+#categories-container p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+#categories-container button {
+    background-color: #81C784;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+#categories-container button:hover {
+    background-color: #66bb6a;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #d8f3dc;
+    color: #333;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+}
+
+footer a {
+    color: #388e3c;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

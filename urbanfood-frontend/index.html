@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanFood</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+     
+
+     .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px; 
+            margin-left: 240px;
+        }
+
+        .button {
+    padding: 12px 30px;
+    background-color: #6F4E37;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+        .logout-btn {
+            background-color: #81C784;
+            color: white;
+          border: none;
+            cursor: pointer;
+            
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #2e7d32;
+        }
+
+        /* Added testimonial styles */
+        .testimonials {
+            background-color: #f9f9f9;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            margin-top: 1rem;
+            color: #4CAF50;
+        }
+
+        /* Added stats styles */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin: 0;
+        }
+        
+        .stat-item p {
+            color: #666;
+            margin: 0.5rem 0 0;
+        }
+        header {
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000; 
+}
+
+
+body {
+    padding-top: 80px; 
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>UrbanFood</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">  Categories ▼</button>
+                <div class="dropdown-content">
+                    <a href="category.html?category=Vegetables">Vegetables</a>
+                    <a href="category.html?category=Fruits">Fruits</a>
+                    <a href="category.html?category=Dairy">Dairy</a>
+                    <a href="category.html?category=Bakery">Baked Goods</a>
+                    <a href="category.html?category=Craft">Handmade Crafts</a>
+                </div>
+            </div>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="Feedback.html">Feedback</a>
+            <a href="login.html" id="login-link">Login</a>
+            <button class="logout-btn" onclick="logout()"style="display:none;">Logout</button>
+            <div class="welcome-container" id="welcome-container" style="display:none;">
+                <span id="welcome-msg">Welcome, user@example.com</span>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>FOOD FOR A HEALTHIER YOU</h2>
+            <p>Fresh produce, direct from urban farms to your table.</p>
+            <a href="categories.html" class="button">Shop Now</a>
+        </section>
+        <section id="categories-container">
+            <div>
+                <h3>Fresh Vegetables</h3>
+                <p>Pick your daily greens.</p>
+                <a href="category.html?category=Vegetables" class="button">Explore</a>
+            </div>
+            <div>
+                <h3>Organic Fruits</h3>
+                <p>Juicy and nutritious.</p>
+                <a href="category.html?category=Fruits" class="button">Explore</a>
+            </div>
+            <div>
+                <h3>Dairy Products</h3>
+                <p>Farm-fresh and wholesome.</p>
+                <a href="category.html?category=Dairy" class="button">Explore</a>
+            </div>
+            <div>
+                <h3>Baked Goods</h3>
+                <p>Warm and Fresh from the oven.</p>
+                <a href="category.html?category=Bakery" class="button">Explore</a>
+            </div>
+            <div>
+                <h3>Handmade Crafts</h3>
+                <p>With a touch of Ceylon.</p>
+                <a href="category.html?category=Craft" class="button">Explore</a>
+            </div>
+        </section>
+
+        <!-- Added stats section -->
+        <section class="stats" style="margin: 10rem 0;">
+            <div class="stat-item">
+                <h3>250+</h3>
+                <p>Local Farmers Supported</p>
+            </div>
+            <div class="stat-item">
+                <h3>10K+</h3>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Sustainably Sourced</p>
+            </div>
+            <div class="stat-item">
+                <h3>24h</h3>
+                <p>Farm to Table</p>
+            </div>
+        </section>
+
+        <!-- Added testimonials section -->
+        <section class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"The quality of produce from UrbanFood is unmatched. I can taste the difference in every bite!"</p>
+                    <div class="testimonial-author">- Sarah J., Regular Customer</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"As a chef, I rely on UrbanFood for the freshest ingredients. Their delivery is always on time."</p>
+                    <div class="testimonial-author">- Michael T., Local Restaurant Owner</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Love knowing exactly where my food comes from and supporting local agriculture."</p>
+                    <div class="testimonial-author">- Priya K., Health Enthusiast</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 UrbanFood | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+    </footer>
+
+    <script>
+        const loggedInEmail = localStorage.getItem("loggedInCustomer");
+
+        if (loggedInEmail) {
+            document.getElementById("welcome-container").style.display = "flex";
+            document.getElementById("welcome-msg").innerText = `Welcome, ${loggedInEmail}`;
+            document.getElementById("login-link").style.display = "none";
+            document.querySelector(".logout-btn").style.display = "inline-block";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInCustomer");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
