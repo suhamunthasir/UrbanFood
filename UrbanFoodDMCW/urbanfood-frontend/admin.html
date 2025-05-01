@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UrbanFood Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    :root {
+    --primary: #2e7d32;
+    --primary-light: #4CAF50;
+    --text-light: #666;
+  }
+  
+  header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  
+  nav {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  
+  nav a:hover {
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  nav a i {
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      gap: 1rem;
+    }
+    
+    header h1 {
+      font-size: 1.5rem;
+    }
+  }
+    main {
+      padding: 30px;
+    }
+
+    .dashboard-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    section:hover {
+      transform: scale(1.01);
+    }
+
+    section h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      border-left: 5px solid #4CAF50;
+      padding-left: 10px;
+      color: #2e7d32;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead {
+      background-color: #e0f2f1;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+    img {
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    button {
+      padding: 6px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    @media screen and (max-width: 900px) {
+      .dashboard-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+          <h1><i class="fas fa-tachometer-alt"></i> UrbanFood Admin Panel</h1>
+          <nav>
+            <a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="manage-products.html"><i class="fas fa-box-open"></i> Manage Products</a>
+            <a href="manage-supplier.html"><i class="fas fa-people-carry"></i> Manage Suppliers</a>
+            <a href="manage-deliveries.html"><i class="fas fa-truck"></i> Manage Deliveries</a>
+            <a href="deliveryMAN.html"><i class="fas fa-sign-out-alt"></i> Delivery Men</a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </nav>
+        </div>
+      </header>
+
+  <main>
+    <div class="dashboard-section">
+      <!-- Products Section -->
+      <section>
+        <h2>📦 All Products</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Image</th>
+              <th>Supplier</th>
+            </tr>
+          </thead>
+          <tbody id="product-table-body">
+            <!-- Products will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Suppliers Section -->
+      <section>
+        <h2>🚚 All Suppliers</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody id="supplier-table-body">
+            <!-- Suppliers will be loaded here -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const productApiUrl = "http://localhost:8080/api/products";
+    const supplierApiUrl = "http://localhost:8080/api/suppliers";
+    const productTableBody = document.getElementById("product-table-body");
+    const supplierTableBody = document.getElementById("supplier-table-body");
+
+    function loadProducts() {
+      fetch(productApiUrl)
+        .then(res => res.json())
+        .then(data => {
+          productTableBody.innerHTML = "";
+          data.forEach(product => {
+            const imagePath = product.imageUrl ? `http://localhost:8080/images/${product.imageUrl}` : "http://localhost:8080/images/placeholder.png";
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${product.productId}</td>
+              <td>${product.name}</td>
+              <td>${product.description}</td>
+              <td>${product.category}</td>
+              <td>${product.price}</td>
+              <td>${product.stockQuantity}</td>
+              <td><img src="${imagePath}" width="60" height="60" alt="Product Image"/></td>
+              <td>${product.supplier.name}</td>
+            `;
+            productTableBody.appendChild(row);
+          });
+        })
+        .catch(err => console.error("Error loading products:", err));
+    }
+
+    function loadSuppliers() {
+      fetch(supplierApiUrl)
+        .then(res => res.json())
+        .then(data => {
+          supplierTableBody.innerHTML = "";
+          data.forEach(supplier => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${supplier.supplierId}</td>
+              <td>${supplier.name}</td>
+              <td>${supplier.contact}</td>
+              <td>${supplier.email}</td>
+              <td>${supplier.address}</td>
+            `;
+            supplierTableBody.appendChild(row);
+          });
+        })
+        .catch(err => console.error("Error loading suppliers:", err));
+    }
+
+    window.onload = () => {
+      loadProducts();
+      loadSuppliers();
+    }
+  </script>
+</body>
+</html>

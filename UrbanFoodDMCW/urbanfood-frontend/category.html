@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanFood - Shop</title>
+    <style>
+        /* Reset and base styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(to right, #4CAF50, #81C784);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+        }
+
+        nav a,
+        .dropbtn {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        .dropdown:hover .dropbtn {
+            color: #e8f5e9;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .category-header h2 {
+            font-size: 2.4rem;
+            color: #333;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin: 5px 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #2ecc71;
+        }
+
+        .remove-btn {
+            background-color: #e74c3c;
+        }
+
+        .remove-btn:hover {
+            background-color: #c0392b;
+        }
+
+        footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #d8f3dc;
+    color: #333;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+}
+
+footer a {
+    color: #388e3c;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+        .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px; 
+            margin-left: 240px;
+        }
+
+
+        .logout-btn {
+            background-color: #81C784;
+            color: white;
+          border: none;
+            cursor: pointer;
+            
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>UrbanFood - Store</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">  Categories ▼</button>
+                <div class="dropdown-content">
+                    <a href="category.html?category=Vegetables">Vegetables</a>
+                    <a href="category.html?category=Fruits">Fruits</a>
+                    <a href="category.html?category=Dairy">Dairy</a>
+                    <a href="category.html?category=Bakery">Baked Goods</a>
+                    <a href="category.html?category=Craft">Handmade Crafts</a>
+                </div>
+            </div>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="Feedback.html">Feedback</a>
+            <a href="login.html" id="login-link">Login</a>
+            <button class="logout-btn" onclick="logout()"style="display:none;">Logout</button>
+            <div class="welcome-container" id="welcome-container" style="display:none;">
+                <span id="welcome-msg">Welcome, user@example.com</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="category-header">
+            <h2><span id="category-name"></span></h2>
+        </section>
+        <section id="product-list" class="product-list"></section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 UrbanFood | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+    </footer>
+
+    <script>
+    
+
+        const apiUrl = "http://localhost:8080/api/products";
+        const productList = document.getElementById("product-list");
+        const categoryName = document.getElementById("category-name");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        categoryName.textContent = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Products';
+
+        function loadProductsByCategory(category) {
+            fetch(apiUrl)
+                .then(res => res.json())
+                .then(data => {
+                    const filtered = data.filter(product =>
+                        product.category && product.category.toLowerCase() === category.toLowerCase()
+                    );
+
+                    productList.innerHTML = "";
+
+                    if (filtered.length > 0) {
+                        filtered.forEach(product => {
+                            const imagePath = product.imageUrl
+                                ? `http://localhost:8080/images/${product.imageUrl}`
+                                : "http://localhost:8080/images/placeholder.png";
+
+                            const card = document.createElement("div");
+                            card.className = "product-card";
+                            card.innerHTML = `
+                                <img src="${imagePath}" class="product-image" alt="${product.name}"/>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p class="product-description">${product.description}</p>
+                                    <p class="product-price">Rs ${product.price}</p>
+                                    <label>Qty: 
+                                        <input type="number" min="1" value="1" id="qty-${product.productId}" style="width: 60px;">
+                                    </label><br><br>
+                                    <button class="add-to-cart-btn" onclick="addToCart(${product.productId}, '${product.name}', ${product.price})">Add to Cart</button>
+                                    <button class="add-to-cart-btn remove-btn" onclick="removeFromCart(${product.productId})">Remove</button>
+                                </div>
+                            `;
+                            productList.appendChild(card);
+                        });
+                    } else {
+                        productList.innerHTML = "<p>No products found in this category.</p>";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error loading products:", err);
+                    productList.innerHTML = "<p>Error loading products. Please try again later.</p>";
+                });
+        }
+
+        function addToCart(productId, name, price) {
+            const qtyInput = document.getElementById(`qty-${productId}`);
+            const quantity = parseInt(qtyInput.value);
+
+            if (quantity < 1 || isNaN(quantity)) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const existing = cart.find(item => item.productId === productId);
+
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                cart.push({ productId, name, price, quantity });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            
+        }
+
+        function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart = cart.filter(item => item.productId !== productId);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert("Product removed from cart.");
+        }
+
+        loadProductsByCategory(category);
+
+        const loggedInEmail = localStorage.getItem("loggedInCustomer");
+
+        if (loggedInEmail) {
+            document.getElementById("welcome-container").style.display = "flex";
+            document.getElementById("welcome-msg").innerText = `Welcome, ${loggedInEmail}`;
+            document.getElementById("login-link").style.display = "none";
+            document.querySelector(".logout-btn").style.display = "inline-block";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInCustomer");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UrbanFood - Cart</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <style>
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background: linear-gradient(to right, #4CAF50, #81C784);
+        color: white;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: bold;
+    }
+
+    .cart-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    .product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product-info h3 {
+        margin-top: 10px;
+    }
+
+    .quantity {
+        margin: 10px 0;
+    }
+
+    .remove-btn {
+        background-color: #e74c3c;
+        border: none;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .remove-btn:hover {
+        background-color: #c0392b;
+    }
+
+    .total-price {
+        text-align: right;
+        font-size: 1.5rem;
+        margin-top: 30px;
+    }
+
+    .order-section {
+        margin-top: 40px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .order-section input, .order-section select, .order-section button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .place-btn {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .place-btn:hover {
+        background-color: #388E3C;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px; 
+            margin-left: 255px;
+        }
+
+
+        .logout-btn {
+            background-color: #81C784;
+            color: white;
+          border: none;
+            cursor: pointer;
+            
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #2e7d32;
+        }
+        nav a,
+        .dropbtn {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        .dropdown:hover .dropbtn {
+            color: #e8f5e9;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UrbanFood - Your Cart</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">  Categories ▼</button>
+            <div class="dropdown-content">
+                <a href="category.html?category=Vegetables">Vegetables</a>
+                <a href="category.html?category=Fruits">Fruits</a>
+                <a href="category.html?category=Dairy">Dairy</a>
+                <a href="category.html?category=Bakery">Baked Goods</a>
+                <a href="category.html?category=Craft">Handmade Crafts</a>
+            </div>
+        </div>
+        <a href="cart.html">🛒 Cart</a>
+        <a href="Feedback.html">Feedback</a>
+        <a href="login.html" id="login-link">Login</a>
+        <button class="logout-btn" onclick="logout()"style="display:none;">Logout</button>
+        <div class="welcome-container" id="welcome-container" style="display:none;">
+            <span id="welcome-msg">Welcome, user@example.com</span>
+        </div>
+    </nav>
+  </header>
+
+  <main class="cart-container">
+    <div id="cart-list" class="product-list"></div>
+    <div class="total-price" id="total-price">Total: Rs 0</div>
+
+    <!-- Order Info Section -->
+    <div class="order-section">
+      <h2>Complete Your Order</h2>
+      <input type="text" id="delivery-address" placeholder="Enter Delivery Address" required>
+      <select id="payment-type">
+        <option value="Cash">Cash</option>
+        <option value="Card">Card</option>
+      </select>
+      <button class="place-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UrbanFood | <a href="terms.html">Terms</a> | <a href="privacy.html">Privacy</a></p>
+  </footer>
+  <script>
+    const cartList = document.getElementById("cart-list");
+    const totalPriceDisplay = document.getElementById("total-price");
+    const productApiUrl = "http://localhost:8080/api/products";
+    const imageBaseUrl = "http://localhost:8080/images/";
+    const loggedInEmail = localStorage.getItem("loggedInCustomer");
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let products = [];
+
+    // Fetch products and display cart
+    async function loadCart() {
+        try {
+            const response = await fetch(productApiUrl);
+            products = await response.json();
+            renderCart();
+        } catch (error) {
+            console.error("Error fetching products:", error);
+            alert("Failed to load products.");
+        }
+    }
+
+    function renderCart() {
+        cartList.innerHTML = "";
+        let total = 0;
+
+        cart.forEach(item => {
+            const product = products.find(p => p.productId === item.productId);
+            if (!product) return;
+
+            const productTotal = product.price * item.quantity;
+            total += productTotal;
+
+            const card = document.createElement("div");
+            card.className = "product-card";
+            card.innerHTML = `
+                <img src="${imageBaseUrl + product.imageUrl}" alt="Product Image">
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>Rs ${product.price}</p>
+                    <div class="quantity">
+                        Quantity: 
+                        <input type="number" min="1" value="${item.quantity}" data-id="${product.productId}" onchange="updateQuantity(this)">
+                    </div>
+                    <p>Subtotal: Rs ${productTotal}</p>
+                    <button class="remove-btn" onclick="removeFromCart(${product.productId})">Remove</button>
+                </div>
+            `;
+            cartList.appendChild(card);
+        });
+
+        totalPriceDisplay.textContent = `Total: Rs ${total}`;
+    }
+
+    function updateQuantity(input) {
+        const productId = parseInt(input.dataset.id);
+        const newQty = parseInt(input.value);
+
+        if (newQty <= 0) return;
+
+        cart = cart.map(item => 
+            item.productId === productId ? { ...item, quantity: newQty } : item
+        );
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.productId !== productId);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    async function placeOrder() {
+        const paymentType = document.getElementById("payment-type").value;
+
+        if (!loggedInEmail) {
+            alert("Please login to place an order.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+    const customerId = localStorage.getItem("customerId");
+
+    if (!customerId) {
+        alert("Customer not found. Please log in again.");
+        return;
+    }
+
+    const customerResponse = await fetch(`http://localhost:8080/api/customers/${customerId}`);
+    if (!customerResponse.ok) throw new Error("Failed to fetch customer.");
+
+    const customer = await customerResponse.json();
+
+    const totalAmount = calculateTotalAmount();
+
+
+            // Save Order
+            const orderResponse = await fetch("http://localhost:8080/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    orderDate: new Date().toISOString().split('T')[0],
+                    totalAmount,
+                    customer: { id: customerId }
+                })
+            });
+
+            if (!orderResponse.ok) throw new Error("Failed to place order.");
+            const order = await orderResponse.json();
+
+            // Save Payment
+            const paymentResponse = await fetch("http://localhost:8080/api/payments", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    totalAmount,
+                    paymentDate: new Date().toISOString().split('T')[0],
+                    paymentType,
+                    paymentStatus: "Pending",
+                    customerId,
+                    orderId: order.orderId
+                })
+            });
+
+            if (!paymentResponse.ok) throw new Error("Failed to save payment.");
+
+            const deliveryAddress = document.getElementById("delivery-address").value;
+
+            // Save Delivery
+            const deliveryResponse = await fetch("http://localhost:8080/api/deliveries", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    deliveryAddress: deliveryAddress,
+                    deliveryStatus: "Pending",
+                    orderId: order.orderId
+                })
+            });
+
+            if (!deliveryResponse.ok) throw new Error("Failed to save delivery.");
+
+            alert("Order placed successfully!");
+            localStorage.removeItem("cart");
+            window.location.href = "ordersuccess.html";
+        } catch (error) {
+            console.error("Error placing order:", error);
+            alert("There was a problem placing the order. Please try again.");
+        }
+    }
+
+    function calculateTotalAmount() {
+        return cart.reduce((sum, item) => {
+            const product = products.find(p => p.productId === item.productId);
+            return product ? sum + (product.price * item.quantity) : sum;
+        }, 0);
+    }
+
+    function logout() {
+        localStorage.removeItem("loggedInCustomer");
+        localStorage.removeItem("cart");
+        window.location.href = "login.html";
+    }
+
+    // Initialize page with user info and cart
+    window.onload = () => {
+        if (loggedInEmail) {
+            document.getElementById("welcome-container").style.display = "flex";
+            document.getElementById("welcome-msg").innerText = `Welcome, ${loggedInEmail}`;
+            document.getElementById("login-link").style.display = "none";
+            document.querySelector(".logout-btn").style.display = "inline-block";
+        }
+
+        loadCart();
+    };
+</script>
+
+
+</body>
+</html>

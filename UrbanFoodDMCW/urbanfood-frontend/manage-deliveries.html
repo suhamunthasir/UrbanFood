@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Deliveries and Payments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4CAF50;
+      --secondary: #007bff;
+      --secondary-dark: #0056b3;
+      --success: #28a745;
+      --success-dark: #218838;
+      --text: #333;
+      --text-light: #666;
+      --bg: #f5f7fa;
+      --card-bg: #fff;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1.5rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+    
+    nav {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    nav a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    nav a:hover {
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    nav a i {
+      font-size: 0.9rem;
+    }
+    
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .form-container, 
+    .delivery-list-container, 
+    .payment-list-container {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    
+    .payment-list-container {
+      grid-column: span 2;
+    }
+    
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    
+    h2 i {
+      font-size: 1.1rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background-color: var(--card-bg);
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    
+    button i {
+      font-size: 0.9rem;
+    }
+    
+    button.primary {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    button.primary:hover {
+      background-color: var(--secondary-dark);
+      transform: translateY(-1px);
+    }
+    
+    button.secondary {
+      background-color: var(--success);
+      color: white;
+    }
+    
+    button.secondary:hover {
+      background-color: var(--success-dark);
+      transform: translateY(-1px);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.9rem;
+    }
+    
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 500;
+      padding: 0.8rem 1rem;
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+    
+    td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background-color: var(--card-bg);
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover td {
+      background-color: #f8f9fa;
+    }
+    
+    .action-btn {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+      background-color: var(--primary-light);
+      color: white;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    
+    .action-btn:hover {
+      background-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    
+    .status-pending {
+      color: #ff9800;
+      font-weight: 500;
+    }
+    
+    .status-shipped {
+      color: #2196f3;
+      font-weight: 500;
+    }
+    
+    .status-delivered {
+      color: var(--success);
+      font-weight: 500;
+    }
+    
+    .status-paid {
+      color: var(--success);
+      font-weight: 500;
+    }
+    
+    .status-unpaid {
+      color: #f44336;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .payment-list-container {
+        grid-column: span 1;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+    #delivery-form input, 
+#delivery-form select {
+  width: 95%;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1><i class="fas fa-truck"></i> UrbanFood Admin Panel - Deliveries & Payments</h1>
+      <nav>
+        <a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="manage-products.html"><i class="fas fa-box-open"></i> Manage Products</a>
+        <a href="manage-supplier.html"><i class="fas fa-people-carry"></i> Manage Suppliers</a>
+        <a href="manage-deliveries.html"><i class="fas fa-truck"></i> Manage Deliveries</a>
+        <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Delivery Form -->
+      <div class="form-container">
+        <h2><i class="fas fa-plus-circle"></i> Update Delivery</h2>
+        <form id="delivery-form">
+          <input type="hidden" id="deliveryId" />
+          
+          <div class="form-group">
+            <label for="deliveryAddress">Delivery Address</label>
+            <input type="text" id="deliveryAddress" placeholder="Enter delivery address" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="deliveryStatus">Delivery Status</label>
+            <select id="deliveryStatus" required>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="orderId">Order ID</label>
+            <input type="number" id="orderId" placeholder="Enter order ID" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="deliveryDate">Delivery Date</label>
+            <input type="date" id="deliveryDate" required />
+          </div>
+
+          <div class="button-group">
+            <button type="submit" id="addBtn" class="primary"><i class="fas fa-plus"></i> Select Delivery to Update</button>
+            <button type="button" class="secondary" id="updateBtn" style="display: none;"><i class="fas fa-sync-alt"></i> Update Delivery</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Delivery List -->
+      <div class="delivery-list-container">
+        <h2><i class="fas fa-list"></i> Delivery List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Address</th>
+              <th>Status</th>
+              <th>Order ID</th>
+              <th>Delivery Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="deliveryTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Payment List -->
+      <div class="payment-list-container">
+        <h2><i class="fas fa-credit-card"></i> Payment List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Payment ID</th>
+              <th>Customer ID</th>
+           
+              <th>Amount</th>
+              <th>Payment Date</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Order ID</th>
+            </tr>
+          </thead>
+          <tbody id="paymentTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const deliveryUrl = "http://localhost:8080/api/deliveries";
+    const paymentUrl = "http://localhost:8080/api/payments";
+
+    const form = document.getElementById("delivery-form");
+    const deliveryIdInput = document.getElementById("deliveryId");
+    const addressInput = document.getElementById("deliveryAddress");
+    const statusInput = document.getElementById("deliveryStatus");
+    const orderIdInput = document.getElementById("orderId");
+    const deliveryDateInput = document.getElementById("deliveryDate");
+
+    const addBtn = document.getElementById("addBtn");
+    const updateBtn = document.getElementById("updateBtn");
+
+    const deliveryTableBody = document.getElementById("deliveryTableBody");
+    const paymentTableBody = document.getElementById("paymentTableBody");
+
+    function loadDeliveries() {
+      fetch(deliveryUrl)
+        .then(res => res.json())
+        .then(data => {
+          deliveryTableBody.innerHTML = "";
+          data.forEach(delivery => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${delivery.deliveryId}</td>
+              <td>${delivery.deliveryAddress}</td>
+              <td class="status-${delivery.deliveryStatus.toLowerCase()}">${delivery.deliveryStatus}</td>
+              <td>${delivery.orderId}</td>
+              <td>${delivery.deliveryDate}</td>
+              <td>
+                <button class="action-btn" onclick="editDelivery(${delivery.deliveryId}, '${delivery.deliveryAddress}', '${delivery.deliveryStatus}', ${delivery.orderId}, '${delivery.deliveryDate}')">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+              </td>
+            `;
+            deliveryTableBody.appendChild(row);
+          });
+        });
+    }
+
+    function loadPayments() {
+      fetch(paymentUrl)
+        .then(res => res.json())
+        .then(data => {
+          paymentTableBody.innerHTML = "";
+          data.forEach(payment => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${payment.paymentId}</td>
+              <td>${payment.customerId}</td>
+              
+             <td>Rs. ${payment.totalAmount.toFixed(2)}</td>
+
+              <td>${payment.paymentDate}</td>
+              <td>${payment.paymentType}</td>
+              <td class="status-${payment.paymentStatus.toLowerCase()}">${payment.paymentStatus}</td>
+              <td>${payment.orderId}</td>
+            `;
+            paymentTableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error("Error loading payments:", error);
+          alert("Error loading payments");
+        });
+    }
+
+    function editDelivery(id, address, status, orderId, deliveryDate) {
+      deliveryIdInput.value = id;
+      addressInput.value = address;
+      statusInput.value = status;
+      orderIdInput.value = orderId;
+      deliveryDateInput.value = deliveryDate;
+
+      addBtn.style.display = "none";
+      updateBtn.style.display = "inline-block";
+      
+      // Scroll to form
+      document.querySelector('.form-container').scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const delivery = {
+        deliveryAddress: addressInput.value,
+        deliveryStatus: statusInput.value,
+        orderId: parseInt(orderIdInput.value),
+        deliveryDate: deliveryDateInput.value
+      };
+
+      const id = deliveryIdInput.value;
+      const method = id ? "PUT" : "POST";
+      const url = id ? `${deliveryUrl}/${id}` : deliveryUrl;
+
+      fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(delivery)
+      }).then(response => {
+        if (response.ok) {
+          // If the delivery status is "Delivered", update the payment status to "Paid"
+          if (statusInput.value === "Delivered") {
+            const orderId = parseInt(orderIdInput.value);
+            updatePaymentStatus(orderId);
+          }
+
+          loadDeliveries();
+          loadPayments();
+          form.reset();
+          deliveryIdInput.value = "";
+          addBtn.style.display = "inline-block";
+          updateBtn.style.display = "none";
+        } else {
+          alert("Error: Delivery could not be saved.");
+        }
+      }).catch(error => {
+        console.error("Error:", error);
+        alert("Error: Something went wrong");
+      });
+    });
+
+    updateBtn.addEventListener("click", function () {
+      form.dispatchEvent(new Event("submit"));
+    });
+
+    // Function to update the payment status to "Paid"
+    function updatePaymentStatus(orderId) {
+      fetch(`${paymentUrl}/order/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          paymentStatus: "Paid"
+        })
+      }).then(response => {
+        if (response.ok) {
+          console.log("Payment status updated to Paid.");
+          loadPayments();
+        } else {
+          alert("Error: Payment status could not be updated.");
+        }
+      }).catch(error => {
+        console.error("Error updating payment status:", error);
+        alert("Error: Something went wrong while updating payment status");
+      });
+    }
+
+    window.onload = function () {
+      loadDeliveries();
+      loadPayments();
+      
+      // Set minimum date to today
+      const today = new Date().toISOString().split('T')[0];
+      deliveryDateInput.min = today;
+    };
+  </script>
+
+</body>
+</html>
